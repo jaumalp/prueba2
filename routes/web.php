@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get("/fecha/{f}", function($f){
+
+    $arra = \App\JaimeHelper::getCicloSobreDia(new DateTime($f));
+    return $arra[0]->format('d-m-Y')." => ".$arra[1]." ciclos, dia +".$arra[2]." del ciclo";
+});
+
+
+Route::get("/pedido/{f}","PedidosController@getPedidosDeCiclo");
